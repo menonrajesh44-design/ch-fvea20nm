@@ -33,10 +33,14 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--fg)}
 body{font-family:var(--font-body);font-size:15px;line-height:1.45;
-  padding:calc(env(safe-area-inset-top,0px) + 14px) calc(env(safe-area-inset-right,0px) + 14px)
-          calc(env(safe-area-inset-bottom,0px) + 18px) calc(env(safe-area-inset-left,0px) + 14px);
+  padding:calc(env(safe-area-inset-top,0px) + 8px) calc(env(safe-area-inset-right,0px) + 12px)
+          calc(env(safe-area-inset-bottom,0px) + 12px) calc(env(safe-area-inset-left,0px) + 12px);
   min-height:100vh;-webkit-text-size-adjust:100%}
-header{display:flex;align-items:center;gap:12px;margin:2px 2px 14px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 8px}
+header .logo{height:50px;width:auto;display:block;border:0;border-radius:0}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);font-family:var(--font-mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.pill i{width:7px;height:7px;border-radius:50%;background:#3DDC84;box-shadow:0 0 6px #3DDC84}
+body.offline .pill i{background:#FFD166;box-shadow:0 0 6px #FFD166}
 header img{width:44px;height:44px;border-radius:11px;border:1px solid var(--line)}
 header h1{margin:0;font-family:var(--font-display);font-weight:700;font-size:25px;letter-spacing:.4px;line-height:1.1}
 header .sub{font-family:var(--font-mono);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--orange)}
@@ -45,11 +49,20 @@ header .sub{font-family:var(--font-mono);font-size:11px;letter-spacing:1.6px;tex
 .home .b{width:30px;height:30px;border-radius:8px;background:var(--orange);color:var(--on-orange);display:grid;place-items:center;font-weight:700}
 .home b{font-family:var(--font-display);font-size:17px}
 .home small{margin-left:auto;font-family:var(--font-mono);font-size:10.5px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
-.label{font-family:var(--font-mono);font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin:0 4px 10px;display:flex;justify-content:space-between}
+.label{font-family:var(--font-mono);font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin:0 4px 7px;display:flex;justify-content:space-between}
+.bots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 4px;margin:0 0 12px;padding:10px 4px 8px;list-style:none;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.bot{display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:var(--fg);text-align:center;padding:2px 1px}
+.bot .av{width:58px;height:58px;border-radius:50%;padding:2px;background:var(--c);box-shadow:0 0 0 1px rgba(0,0,0,.4),0 0 10px -2px var(--c)}
+.bot .av img{width:100%;height:100%;border-radius:50%;display:block;border:2px solid var(--bg)}
+.bot:active .av{transform:scale(.94)}
+.bot b{font-family:var(--font-display);font-size:13px;font-weight:700;line-height:1.1;margin-top:2px}
+.bot small{font-family:var(--font-mono);font-size:9.5px;line-height:1.2;color:var(--muted);letter-spacing:.2px}
+.toast{position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);padding:10px 12px;border-radius:12px;background:var(--panel-2);border:1px solid var(--orange);font-size:13px;display:none;z-index:9}
+.toast.on{display:block}.toast a{color:var(--orange-soft)}
 .label span:last-child{color:var(--cyan);letter-spacing:.6px;text-transform:none}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none}
 @media (min-width:560px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.tile{position:relative;display:flex;align-items:center;gap:10px;min-height:68px;padding:12px 10px 12px 11px;
+.tile{position:relative;display:flex;align-items:center;gap:10px;min-height:60px;padding:9px 9px 9px 10px;
   background:var(--panel);border:1px solid var(--line);border-radius:14px;color:var(--fg);text-decoration:none}
 .tile:active{background:var(--panel-2);border-color:var(--orange);transform:scale(.985)}
 .badge{flex:none;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
@@ -63,9 +76,9 @@ header .sub{font-family:var(--font-mono);font-size:11px;letter-spacing:1.6px;tex
 .meter svg{width:17px;height:17px}
 .tile.has-meter .txt small{padding-right:30px}
 .txt{flex:1}
-.hint{margin:16px 4px 0;font-size:12.5px;color:var(--muted)}
+.hint{margin:10px 4px 0;font-size:12.5px;color:var(--muted)}
 .hint svg{width:13px;height:13px;vertical-align:-2px;color:var(--cyan)}
-footer{margin:22px 0 4px;text-align:center;font-family:var(--font-mono);font-size:11px;letter-spacing:1.2px;color:var(--muted)}
+footer{margin:12px 0 2px;text-align:center;font-family:var(--font-mono);font-size:11px;letter-spacing:1.2px;color:var(--muted)}
 footer span{color:var(--orange)}
 .off{display:none;margin:0 0 12px;padding:8px 12px;border-radius:10px;border:1px solid #FFD166;color:#FFD166;font-size:12.5px}
 body.offline .off{display:block}
@@ -73,18 +86,20 @@ body.offline .off{display:block}
 </head>
 <body>
 <header>
-  <img src="apple-touch-icon.png" alt="">
-  <div><h1>Gold Petal</h1><div class="sub">Atelier · Club House</div></div>
+  <img class="logo" src="atelier-logo.png" alt="Gold Petal Atelier · Club House">
+  <span class="pill" role="status"><i></i><span id="pillText">Idle</span></span>
 </header>
-
-<div class="home"><span class="b">✦</span><b>Club House</b><small>phone</small></div>
 <div class="off">You're offline. Club House is ready, but the AI sites need internet.</div>
+
+<p class="label"><span>My Bots</span><span>tap to chat · Grok Bot</span></p>
+<ul class="bots" id="bots"></ul>
 
 <p class="label"><span>AI Windows</span><span id="count"></span></p>
 <ul class="grid" id="grid"></ul>
 
 <p class="hint">Tap a tile to open it. If the app is on your phone, it opens there. <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 16a8 8 0 1 1 16 0"/><path d="M12 16l4-5"/></svg> opens that service's usage and billing page.</p>
 
+<div class="toast" id="toast" role="status"></div>
 <footer><span>Gold Petal</span> · Club House (phone)</footer>
 
 <script>
@@ -105,6 +120,32 @@ const TABS = [
   {name:"CapCut",             url:"https://www.capcut.com/editor",           badge:"Cc", color:"#F2F2F2"},
   {name:"InShot",             url:"https://inshot.com/",                     badge:"In", color:"#FF4F6D"}
 ];
+// My Bots: same 11 crew bots, colours and Grok Bot chat links as the Mac Club House (GP_CHAT, 3 Oct).
+const BOTS = [
+  {id:"ralph",      name:"Ralph",       role:"IT",            color:"#3BA4FF", agent:"f8e4a8fb-5872-4125-af16-c7856905afda"},
+  {id:"alexa",      name:"Alexa",       role:"Research",      color:"#FF6FA3", agent:"5bcbb9d6-42f0-46dc-8cca-7180789c0fcb"},
+  {id:"miranda",    name:"Miranda",     role:"Sales",         color:"#2FD18B", agent:"e6dd15c9-3668-485b-a56c-1137af4f6dc2"},
+  {id:"priya",      name:"Priya",       role:"Sales support", color:"#A77BFF", agent:"b2791c6f-676f-4bc0-aed2-8251f495a176"},
+  {id:"jack",       name:"Jack",        role:"Sourcing",      color:"#6F8CFF", agent:"eafd86dd-a751-4c23-a1c4-f159a691a0c1"},
+  {id:"millie",     name:"Millie",      role:"SMS",           color:"#2FD3C8", agent:"f22aa575-ceca-486f-b922-69b2f9c55230"},
+  {id:"orange",     name:"Orange",      role:"Accounts",      color:"#FF9F1C", agent:"f9a452e5-6439-4eb8-b51c-1902bf00652e"},
+  {id:"amra",       name:"Amra",        role:"Legal",         color:"#8B6CFF", agent:"bcceb2ce-9210-4e9c-a909-e19a8c3908e6"},
+  {id:"metaads",    name:"Meta Ads",    role:"Ads",           color:"#4C9BFF", agent:"da8d3fee-7626-4bd3-8987-8bfc578c8bf7"},
+  {id:"orchidwest", name:"Orchid West", role:"Brand archive", color:"#D25BC0", agent:"a8f8530a-fbd9-4de4-8094-51ffe6c1360e"},
+  {id:"mellow",     name:"Mellow",      role:"Sparrow",       color:"#F5C518", agent:"38f18b94-4a29-4806-a266-68b173cbce8b"}
+];
+const APPSTORE = "https://apps.apple.com/app/grok-bot/id6794501026";
+document.getElementById('bots').innerHTML = BOTS.map(b=>`<li><a class="bot" href="grokbot://app/v1/agent?id=${b.agent}" data-name="${esc(b.name)}" style="--c:${b.color}" aria-label="Chat with ${esc(b.name)}, ${esc(b.role)}">
+  <span class="av"><img src="bots/${b.id}.jpg" alt="" width="54" height="54"></span><b>${esc(b.name)}</b><small>${esc(b.role)}</small></a></li>`).join('');
+// If the Grok Bot app doesn't open within ~1.8 s, say so and offer the App Store.
+let toastT;
+function toast(html){const t=document.getElementById('toast');t.innerHTML=html;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),7000);}
+document.getElementById('bots').addEventListener('click',e=>{
+  const a=e.target.closest('a.bot'); if(!a) return;
+  const name=a.dataset.name; let left=false;
+  const off=()=>{left=true;}; document.addEventListener('visibilitychange',off,{once:true}); addEventListener('pagehide',off,{once:true});
+  setTimeout(()=>{ if(!left && document.visibilityState==='visible') toast(`Opening ${name} in Grok Bot… If nothing happened, <a href="${APPSTORE}" target="_blank" rel="noopener">get the Grok Bot app</a> and sign in, then tap again.`); },1800);
+});
 const GAUGE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 16a8 8 0 1 1 16 0"/><path d="M12 16l4-5"/></svg>';
 function ink(hex){const n=parseInt(hex.slice(1),16),r=n>>16,g=n>>8&255,b=n&255;return (0.299*r+0.587*g+0.114*b)>160?'#111418':'#FFFFFF';}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -117,7 +158,7 @@ grid.innerHTML=TABS.map(t=>{
     ${t.meter?`<a class="meter" href="${esc(t.meter)}" target="_blank" rel="noopener" aria-label="${esc(t.name)} usage and billing">${GAUGE}</a>`:''}</li>`;
 }).join('');
 document.getElementById('count').textContent=TABS.length+' shops';
-function net(){document.body.classList.toggle('offline',!navigator.onLine);}
+function net(){document.body.classList.toggle('offline',!navigator.onLine);const p=document.getElementById('pillText');if(p)p.textContent=navigator.onLine?'Idle':'Offline';}
 addEventListener('online',net);addEventListener('offline',net);net();
 if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
 </script>
