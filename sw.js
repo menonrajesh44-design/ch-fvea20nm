@@ -1,6 +1,7 @@
 // Club House (phone) service worker: keeps the app shell available offline.
 // Only caches this folder's own files. AI sites always open live in the browser.
-const CACHE = 'clubhouse-phone-v2';
+const CACHE = 'clubhouse-phone-v3';
+const NET_TIMEOUT_MS = 3000; // if the network stalls (e.g. China firewall), open from cache after 3 s
 const SHELL = [
   './', './index.html', './manifest.json', './robots.txt',
   './apple-touch-icon.png', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './favicon.png',
@@ -19,11 +20,15 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
-  // Network first (so updates show up), fall back to the cached shell when offline.
+  // Network first (so updates show up), but give up after NET_TIMEOUT_MS and use the cached copy,
+  // so the Home Screen app still opens instantly when github.io is slow or disrupted.
+  const network = fetch(req).then(res => {
+    if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
+    return res;
+  });
+  const cached = () => caches.match(req).then(r => r || caches.match('./index.html'));
+  const timeout = new Promise(resolve => setTimeout(resolve, NET_TIMEOUT_MS)).then(cached);
   e.respondWith(
-    fetch(req).then(res => {
-      if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
-      return res;
-    }).catch(() => caches.match(req).then(r => r || caches.match('./index.html')))
+    Promise.race([network.catch(cached), timeout.then(r => r || network)])
   );
 });
