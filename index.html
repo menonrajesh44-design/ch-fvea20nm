@@ -57,6 +57,10 @@ header .sub{font-family:var(--font-mono);font-size:11px;letter-spacing:1.6px;tex
 .bot:active .av{transform:scale(.94)}
 .bot b{font-family:var(--font-display);font-size:13px;font-weight:700;line-height:1.1;margin-top:2px}
 .bot small{font-family:var(--font-mono);font-size:9.5px;line-height:1.2;color:var(--muted);letter-spacing:.2px}
+.qnav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0 0 10px}
+.qnav a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--fg);text-decoration:none;font-size:12px;font-weight:600;text-align:center;line-height:1.15}
+.qnav a span{font-size:16px;line-height:1}
+.qnav a:active{border-color:var(--orange);background:var(--panel-2)}
 .toast{position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);padding:10px 12px;border-radius:12px;background:var(--panel-2);border:1px solid var(--orange);font-size:13px;display:none;z-index:9}
 .toast.on{display:block}.toast a{color:var(--orange-soft)}
 .label span:last-child{color:var(--cyan);letter-spacing:.6px;text-transform:none}
@@ -69,7 +73,7 @@ header .sub{font-family:var(--font-mono);font-size:11px;letter-spacing:1.6px;tex
   font-family:var(--font-display);font-weight:700;font-size:16px;letter-spacing:-.3px}
 .txt{min-width:0;display:flex;flex-direction:column}
 .txt b{font-weight:600;font-size:15.5px;line-height:1.2;white-space:normal;overflow-wrap:anywhere}
-.txt small{font-family:var(--font-mono);font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.txt small{font-family:var(--font-mono);font-size:9.5px;line-height:1.2;color:var(--muted);white-space:normal;overflow-wrap:anywhere}
 .meter{position:absolute;bottom:6px;right:6px;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;
   color:var(--cyan);background:rgba(111,231,255,.07);border:1px solid rgba(111,231,255,.22)}
 .meter:active{background:rgba(111,231,255,.2)}
@@ -91,6 +95,12 @@ body.offline .off{display:block}
 </header>
 <div class="off">You're offline. Club House is ready, but the AI sites need internet.</div>
 
+<nav class="qnav" aria-label="Club House">
+  <a href="club.html#s-codex"><span>💬</span>Codex</a><a href="club.html#s-tasks"><span>✅</span>Tasks</a>
+  <a href="club.html#s-memory"><span>🧠</span>Memory</a><a href="club.html#s-jobs"><span>📋</span>Jobs</a>
+  <a href="club.html#clubCard"><span>🤖</span>Floor</a><a href="club.html#s-team"><span>👥</span>Team</a>
+  <a href="club.html#s-business"><span>🏷️</span>Business</a><a href="club.html#s-floor"><span>🕹️</span>Robot</a>
+</nav>
 <p class="label"><span>My Bots</span><span>tap to chat · Grok Bot</span></p>
 <ul class="bots" id="bots"></ul>
 
