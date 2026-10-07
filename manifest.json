@@ -1,6 +1,7 @@
 {
   "name": "Gold Petal Club House",
   "short_name": "Club House",
+  "id": "./index.html",
   "description": "Club House",
   "start_url": "./index.html",
   "scope": "./",
