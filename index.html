@@ -61,7 +61,7 @@ header .sub{font-family:var(--font-mono);font-size:11px;letter-spacing:1.6px;tex
 .qnav a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--fg);text-decoration:none;font-size:12px;font-weight:600;text-align:center;line-height:1.15}
 .qnav a span{font-size:16px;line-height:1}
 .qnav a:active{border-color:var(--orange);background:var(--panel-2)}
-.toast{position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);padding:10px 12px;border-radius:12px;background:var(--panel-2);border:1px solid var(--orange);font-size:13px;display:none;z-index:9}
+.toast{position:fixed;z-index:30;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);padding:10px 12px;border-radius:12px;background:var(--panel-2);border:1px solid var(--orange);font-size:13px;display:none}
 .toast.on{display:block}.toast a{color:var(--orange-soft)}
 .label span:last-child{color:var(--cyan);letter-spacing:.6px;text-transform:none}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none}
@@ -86,6 +86,56 @@ footer{margin:12px 0 2px;text-align:center;font-family:var(--font-mono);font-siz
 footer span{color:var(--orange)}
 .off{display:none;margin:0 0 12px;padding:8px 12px;border-radius:10px;border:1px solid #FFD166;color:#FFD166;font-size:12.5px}
 body.offline .off{display:block}
+/* ===== In-app Grok quick chat (bottom sheet) ===== */
+html.gc-lock,html.gc-lock body{overflow:hidden}
+.gc-back{position:fixed;inset:0;background:rgba(5,7,10,.62);opacity:0;transition:opacity .2s;z-index:20}
+.gc-back.on{opacity:1}
+.gc{--kb:0px;--vvh:100vh;position:fixed;left:0;right:0;bottom:var(--kb);z-index:21;margin:0 auto;max-width:640px;
+  height:min(88vh,calc(var(--vvh) - 28px));display:flex;flex-direction:column;
+  background:var(--panel);border:1px solid var(--line);border-bottom:0;border-top:2px solid var(--c,var(--orange));border-radius:18px 18px 0 0;
+  padding:4px calc(env(safe-area-inset-right,0px) + 12px) calc(env(safe-area-inset-bottom,0px) + 8px) calc(env(safe-area-inset-left,0px) + 12px);
+  box-shadow:0 -10px 40px rgba(0,0,0,.5);transform:translateY(105%);transition:transform .22s ease-out}
+.gc.on{transform:none}
+.gc[hidden],.gc-back[hidden]{display:none}
+.gc-grip{width:38px;height:4px;border-radius:2px;background:var(--line);margin:4px auto 6px;flex:none}
+.gc-head{display:flex;align-items:center;gap:10px;flex:none}
+.gc-av{width:46px;height:46px;border-radius:50%;padding:2px;background:var(--c);box-shadow:0 0 10px -2px var(--c);flex:none}
+.gc-av img{width:100%;height:100%;border-radius:50%;display:block;border:2px solid var(--bg)}
+.gc-id{min-width:0;flex:1;display:flex;flex-direction:column}
+.gc-id b{font-family:var(--font-display);font-size:19px;font-weight:700;line-height:1.1}
+.gc-id small{font-family:var(--font-mono);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--c)}
+.gc-x{flex:none;width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--panel-2);color:var(--fg);font-size:16px;line-height:1;cursor:pointer}
+.gc-sep{margin:6px 0 6px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.3px;color:var(--muted);flex:none}
+.gc-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;flex:none;margin-bottom:6px}
+.gc-tg{display:inline-flex;align-items:center;gap:5px;padding:4px 9px 4px 6px;border-radius:999px;border:1px solid var(--line);background:var(--panel-2);font-size:12px;color:var(--fg);cursor:pointer;white-space:nowrap}
+.gc-tg input{width:15px;height:15px;margin:0;accent-color:var(--orange)}
+.gc-clear{margin-left:auto;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);font-size:12px;cursor:pointer;white-space:nowrap}
+.gc-off{display:none;flex:none;margin:0 0 6px;padding:6px 10px;border-radius:10px;border:1px solid #FFD166;color:#FFD166;font-size:12px}
+body.offline .gc-off{display:block}
+.gc-log{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;display:flex;flex-direction:column;gap:7px;
+  padding:8px 2px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gc-empty{margin:auto;text-align:center;color:var(--muted);font-size:13.5px;padding:10px}
+.gc-m{max-width:86%;padding:8px 11px;border-radius:14px;font-size:15px;line-height:1.4;white-space:pre-wrap;overflow-wrap:anywhere}
+.gc-m.u{align-self:flex-end;background:rgba(255,122,26,.16);border:1px solid rgba(255,122,26,.45);border-bottom-right-radius:4px}
+.gc-m.a{align-self:flex-start;background:var(--panel-2);border:1px solid var(--line);border-bottom-left-radius:4px;display:flex;gap:6px;align-items:flex-end}
+.gc-m.a .gc-t{flex:1;min-width:0}
+.gc-m.err{align-self:center;max-width:94%;background:rgba(255,209,102,.08);border:1px solid #FFD166;color:#FFD166;font-size:13px;text-align:center}
+.gc-say{flex:none;width:28px;height:28px;margin:-2px -4px -3px 0;border-radius:8px;display:grid;place-items:center;border:1px solid rgba(111,231,255,.25);background:rgba(111,231,255,.07);color:var(--cyan);cursor:pointer;padding:0}
+.gc-say svg{width:15px;height:15px}.gc-say.on{background:rgba(111,231,255,.22)}
+.gc-dots{display:inline-flex;gap:4px;padding:4px 0}.gc-dots i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:gcb 1s infinite}
+.gc-dots i:nth-child(2){animation-delay:.15s}.gc-dots i:nth-child(3){animation-delay:.3s}
+@keyframes gcb{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.gc-in,.gc-row{display:flex;gap:8px;align-items:flex-end;flex:none}
+.gc-in{margin-top:8px}.gc-in[hidden],.gc-pass[hidden]{display:none}
+.gc-in textarea,.gc-row input{flex:1;min-width:0;resize:none;max-height:120px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:16px/1.35 var(--font-body)}
+.gc-in textarea:focus,.gc-row input:focus{outline:none;border-color:var(--orange)}
+.gc-in button,.gc-row button{flex:none;height:42px;padding:0 16px;border-radius:12px;border:0;background:var(--orange);color:var(--on-orange);font-family:var(--font-display);font-weight:700;font-size:15px;cursor:pointer}
+.gc-in button.stop{background:var(--panel-2);color:var(--fg);border:1px solid var(--orange)}
+.gc-pass{margin-top:8px;flex:none}
+.gc-pass label{display:block;font-size:13px;margin:0 2px 6px}.gc-pass label small{color:var(--muted)}
+.gc-passmsg{margin:6px 2px 0;color:#FFD166;font-size:12.5px;min-height:0}.gc-passmsg:empty{display:none}
+.gc-open{flex:none;align-self:center;margin-top:7px;font-family:var(--font-mono);font-size:11px;letter-spacing:.5px;color:var(--muted);text-decoration:none;padding:2px 6px}
+.gc-open:active{color:var(--orange-soft)}
 </style>
 </head>
 <body>
@@ -93,7 +143,7 @@ body.offline .off{display:block}
   <img class="logo" src="atelier-logo.png" alt="Gold Petal Atelier · Club House">
   <span class="pill" role="status"><i></i><span id="pillText">Idle</span></span>
 </header>
-<div class="off">You're offline. Club House is ready, but the AI sites need internet.</div>
+<div class="off">You're offline. Club House is ready, but the AI sites and bot chat need internet.</div>
 
 <nav class="qnav" aria-label="Club House">
   <a href="club.html#s-codex"><span>💬</span>Codex</a><a href="club.html#s-tasks"><span>✅</span>Tasks</a>
@@ -101,7 +151,7 @@ body.offline .off{display:block}
   <a href="club.html#clubCard"><span>🤖</span>Floor</a><a href="club.html#s-team"><span>👥</span>Team</a>
   <a href="club.html#s-business"><span>🏷️</span>Business</a><a href="club.html#s-floor"><span>🕹️</span>Robot</a>
 </nav>
-<p class="label"><span>My Bots</span><span>tap to chat · Grok Bot</span></p>
+<p class="label"><span>My Bots</span><span>tap to chat · in Club House</span></p>
 <ul class="bots" id="bots"></ul>
 
 <p class="label"><span>AI Windows</span><span id="count"></span></p>
@@ -112,6 +162,7 @@ body.offline .off{display:block}
 <div class="toast" id="toast" role="status"></div>
 <footer><span>Gold Petal</span> · Club House (phone)</footer>
 
+<script src="grokchat.js"></script>
 <script>
 // Same order, URLs, badges and colours as the "AI WINDOWS" list.
 const TABS = [
@@ -145,17 +196,25 @@ const BOTS = [
   {id:"mellow",     name:"Mellow",      role:"Sparrow",       color:"#F5C518", agent:"38f18b94-4a29-4806-a266-68b173cbce8b"}
 ];
 const APPSTORE = "https://apps.apple.com/app/grok-bot/id6794501026";
-document.getElementById('bots').innerHTML = BOTS.map(b=>`<li><a class="bot" href="grokbot://app/v1/agent?id=${b.agent}" data-name="${esc(b.name)}" style="--c:${b.color}" aria-label="Chat with ${esc(b.name)}, ${esc(b.role)}">
+document.getElementById('bots').innerHTML = BOTS.map(b=>`<li><a class="bot" href="grokbot://app/v1/agent?id=${b.agent}" data-id="${b.id}" data-name="${esc(b.name)}" style="--c:${b.color}" aria-label="Chat with ${esc(b.name)}, ${esc(b.role)}">
   <span class="av"><img src="bots/${b.id}.jpg" alt="" width="54" height="54"></span><b>${esc(b.name)}</b><small>${esc(b.role)}</small></a></li>`).join('');
-// If the Grok Bot app doesn't open within ~1.8 s, say so and offer the App Store.
+// Small status toast.
 let toastT;
 function toast(html){const t=document.getElementById('toast');t.innerHTML=html;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),7000);}
+// Tapping a bot opens the in-app quick chat (grokchat.js). "Open in Grok Bot app" inside the sheet keeps the old link.
+if(window.CHChat) CHChat.initPanel(BOTS);
 document.getElementById('bots').addEventListener('click',e=>{
   const a=e.target.closest('a.bot'); if(!a) return;
-  const name=a.dataset.name; let left=false;
+  if(window.CHChat){ e.preventDefault(); CHChat.open(a.dataset.id); return; }
+  grokBotFallback(a.dataset.name);
+});
+// The sheet's "Open in Grok Bot app" link: if the app doesn't open within ~1.8 s, say so and offer the App Store.
+document.addEventListener('click',e=>{ const a=e.target.closest('a.gc-open'); if(a) grokBotFallback(document.getElementById('gcName').textContent); });
+function grokBotFallback(name){
+  let left=false;
   const off=()=>{left=true;}; document.addEventListener('visibilitychange',off,{once:true}); addEventListener('pagehide',off,{once:true});
   setTimeout(()=>{ if(!left && document.visibilityState==='visible') toast(`Opening ${name} in Grok Bot… If nothing happened, <a href="${APPSTORE}" target="_blank" rel="noopener">get the Grok Bot app</a> and sign in, then tap again.`); },1800);
-});
+}
 const GAUGE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 16a8 8 0 1 1 16 0"/><path d="M12 16l4-5"/></svg>';
 function ink(hex){const n=parseInt(hex.slice(1),16),r=n>>16,g=n>>8&255,b=n&255;return (0.299*r+0.587*g+0.114*b)>160?'#111418':'#FFFFFF';}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}

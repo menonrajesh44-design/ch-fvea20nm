@@ -878,6 +878,7 @@ header{gap:8px;flex-wrap:nowrap}
 
 </div>
 
+<script src="grokchat.js"></script>
 <script id="gp-chat-links">
 // Talk to a bot: each crew bot opens its own Grok Bot chat (added 3 Oct).
 window.GP_CHAT = (function () {
@@ -1269,8 +1270,11 @@ window.GP_CHAT = (function () {
     return value;
   }
   $('saveCodexPreferences').addEventListener('click', function () { preferences = $('codexPreferences').value.slice(0, 6000); if (save() !== false) memNote('Preferences saved.'); });
-  $('backupCodexContext').addEventListener('click', function () {
-    var blob = new Blob([JSON.stringify(contextBackup(), null, 2)], { type: 'application/json' });
+  $('backupCodexContext').addEventListener('click', async function () {
+    var backup = contextBackup();
+    // Bot quick chats (stored in IndexedDB by grokchat.js) ride along in the same file.
+    try { if (window.CHChat) backup.grokChats = await window.CHChat.exportAll(); } catch (e) {}
+    var blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
     var url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = 'codex-context-' + new Date().toISOString().slice(0, 10) + '.json'; a.click(); setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
   });
   $('restoreCodexContext').addEventListener('click', function () { $('codexContextFile').click(); });
@@ -1283,17 +1287,21 @@ window.GP_CHAT = (function () {
       localStorage.setItem('codex-context-before-restore', JSON.stringify(contextBackup()));
       applyData(backup.data); save(); $('codexPreferences').value = preferences;
       renderTasks(); renderMemories(); renderBusiness(); renderJobs(); renderMembers(); renderChat(); memNote('Previous context recovered.');
+      if (window.CHChat) window.CHChat.recoverPrevious().then(function (ok) { if (ok) memNote('Previous context and bot chats recovered.'); }).catch(function () {});
     } catch (err) { memNote('Recovery failed: ' + err.message, true); }
   });
   $('codexContextFile').addEventListener('change', async function (e) {
     var file = e.target.files[0]; e.target.value = ''; if (!file) return;
     try {
-      if (file.size > 2000000) throw new Error('Backup exceeds 2 MB.');
+      if (file.size > 12000000) throw new Error('Backup exceeds 12 MB.');
       var backup = validateContextBackup(JSON.parse(await file.text()));
-      if (!window.confirm('Restore this context backup? Your current context will be kept as a local recovery copy.')) return;
+      var chats = backup.grokChats;
+      if (chats != null) { if (!window.CHChat) throw new Error('Bot chat backup found but chat storage is not available.'); window.CHChat.validate(chats); }
+      if (!window.confirm('Restore this context backup' + (chats ? ' (including bot chats)' : '') + '? Your current context will be kept as a local recovery copy.')) return;
       localStorage.setItem('codex-context-before-restore', JSON.stringify(contextBackup()));
       applyData(backup.data); save(); $('codexPreferences').value = preferences;
-      renderTasks(); renderMemories(); renderBusiness(); renderJobs(); renderMembers(); renderChat(); memNote('Context restored. Previous context is retained locally.');
+      if (chats) await window.CHChat.importAll(chats);
+      renderTasks(); renderMemories(); renderBusiness(); renderJobs(); renderMembers(); renderChat(); memNote('Context' + (chats ? ' and bot chats' : '') + ' restored. Previous context is retained locally.');
     } catch (err) { memNote('Restore failed: ' + err.message, true); }
   });
 
