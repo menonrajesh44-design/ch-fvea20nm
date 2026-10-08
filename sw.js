@@ -1,7 +1,7 @@
 // Club House (phone) service worker: keeps the app shell available offline.
 // Only caches this folder's own files. AI sites always open live in the browser.
 // Bot chat (relay /api/chat, POST, another origin) is never cached.
-const CACHE = 'clubhouse-phone-v6';
+const CACHE = 'clubhouse-phone-v7'; // v7: Gold Petal Atelier icons + name
 const NET_TIMEOUT_MS = 3000; // if the network stalls (e.g. China firewall), open from cache after 3 s
 const SHELL = [
   './', './index.html', './club.html', './grokchat.js', './manifest.json', './robots.txt',
