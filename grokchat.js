@@ -7,7 +7,7 @@
   'use strict';
 
   // ===== The one setting to change after deploying the relay =====
-  const RELAY_URL = 'https://ch-relay-PLACEHOLDER.pages.dev';
+  const RELAY_URL = 'https://ch-relay.pages.dev';
   // ================================================================
 
   const PREFIX = 'ch.dubai.chat.';
