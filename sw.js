@@ -1,10 +1,10 @@
 // Club House (phone) service worker: keeps the app shell available offline.
 // Only caches this folder's own files. AI sites always open live in the browser.
 // Bot chat (relay /api/chat, POST, another origin) is never cached.
-const CACHE = 'clubhouse-phone-v9'; // v9: tap fix: never swap a page for Home; navigations network-first, own-page cache fallback only
+const CACHE = 'clubhouse-phone-v10'; // v10: Steam room + new Meeting room (laser PC, laser keyboard, board, minutes)
 const NET_TIMEOUT_MS = 3000; // if the network stalls (e.g. China firewall), open from cache after 3 s
 const SHELL = [
-  './', './index.html', './club.html', './meeting.html',
+  './', './index.html', './club.html', './meeting.html', './steam.html',
   './room/ralph.png', './room/millie.png', './room/miranda.png', './room/payal.png', './room/alexa.png', './room/metaads.png', './grokchat.js', './manifest.json', './robots.txt',
   './apple-touch-icon.png', './atelier-logo.png',
   './bots/ralph.jpg', './bots/alexa.jpg', './bots/miranda.jpg', './bots/priya.jpg', './bots/jack.jpg', './bots/millie.jpg',

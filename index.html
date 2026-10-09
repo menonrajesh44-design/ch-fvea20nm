@@ -178,6 +178,19 @@ header .logo{height:46px}
 footer{margin:18px 0 6px}
 .txt small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal}
 .txt b{overflow-wrap:normal}
+
+/* ===== two spaces ===== */
+.spaces{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 18px}
+.space{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;min-height:118px;padding:14px;border-radius:18px;text-decoration:none;color:var(--fg);overflow:hidden;touch-action:manipulation}
+.space *{pointer-events:none}
+.space .ic{position:absolute;top:12px;left:14px;font-size:30px;line-height:1}
+.space b{font-family:var(--font-display);font-size:19px;line-height:1.1}
+.space small{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.space.steam{border:1px solid rgba(232,184,106,.5);background:radial-gradient(90% 90% at 80% 0%,rgba(255,190,120,.28),transparent 60%),linear-gradient(140deg,#3A271D,#1E1511)}
+.space.meet{border:1px solid rgba(111,231,255,.5);background:radial-gradient(90% 90% at 80% 0%,rgba(111,231,255,.22),transparent 60%),linear-gradient(140deg,#14202A,#0D1117)}
+.space .live{position:absolute;top:12px;right:12px;display:inline-flex;align-items:center;gap:5px;padding:3px 7px;border-radius:6px;border:1px solid #FF4D5E;color:#FFC2C8;font-family:var(--font-mono);font-size:9.5px;letter-spacing:1.4px}
+.space .live i{width:6px;height:6px;border-radius:50%;background:#FF4D5E;animation:gcb 1.4s infinite}
+.space:active{transform:scale(.97)}
 </style>
 </head>
 <body>
@@ -193,12 +206,12 @@ footer{margin:18px 0 6px}
   <a href="club.html#clubCard"><span>🤖</span>Floor</a><a href="club.html#s-team"><span>👥</span>Team</a>
   <a href="club.html#s-business"><span>🏷️</span>Business</a><a href="club.html#s-floor"><span>🕹️</span>Robot</a>
 </nav>
-<a class="room" href="meeting.html" aria-label="Open the Meeting room: Gold Petal sales sync">
-  <span class="mic">🎙️</span>
-  <span class="t"><b>Meeting room</b><small>Gold Petal sales sync · 9 Oct</small>
-    <span class="faces"><img src="room/ralph.png" alt=""><img src="room/millie.png" alt=""><img src="room/miranda.png" alt=""><img src="room/payal.png" alt=""><img src="room/alexa.png" alt=""><img src="room/metaads.png" alt=""></span></span>
-  <span class="live"><i></i>LIVE</span>
-</a>
+<div class="spaces">
+<a class="space steam" href="steam.html" aria-label="Open the Steam room">
+  <span class="ic">♨︎</span><b>Steam room</b><small>chill · hang out</small></a>
+<a class="space meet" href="meeting.html" aria-label="Open the Meeting room">
+  <span class="ic">🖥️</span><b>Meeting room</b><small>laser PC · board</small><span class="live"><i></i>LIVE</span></a>
+</div>
 <p class="label"><span>My Bots</span><span>tap to chat · in Club House</span></p>
 <ul class="bots" id="bots"></ul>
 
@@ -210,7 +223,7 @@ footer{margin:18px 0 6px}
 <div class="toast" id="toast" role="status"></div>
 <footer><span>Gold Petal Atelier</span> · Club House (phone)</footer>
 
-<script src="grokchat.js?v=9"></script>
+<script src="grokchat.js?v=10"></script>
 <script>
 // Same order, URLs, badges and colours as the "AI WINDOWS" list.
 const TABS = [
@@ -279,7 +292,7 @@ function net(){document.body.classList.toggle('offline',!navigator.onLine);const
 addEventListener('online',net);addEventListener('offline',net);net();
 function unstick(){ if(window.CHChat) try{CHChat.close();}catch(e){} document.documentElement.classList.remove('gc-lock'); document.querySelectorAll('.gc-back:not(.on)').forEach(b=>b.hidden=true); }
 addEventListener('pageshow',e=>{ if(e.persisted) unstick(); });
-if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=9',{updateViaCache:'none'}).catch(()=>{}));}
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=10',{updateViaCache:'none'}).catch(()=>{}));}
 </script>
 </body>
 </html>
