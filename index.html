@@ -86,17 +86,6 @@ footer{margin:12px 0 2px;text-align:center;font-family:var(--font-mono);font-siz
 footer span{color:var(--orange)}
 .off{display:none;margin:0 0 12px;padding:8px 12px;border-radius:10px;border:1px solid #FFD166;color:#FFD166;font-size:12.5px}
 body.offline .off{display:block}
-/* ===== Meeting room tile ===== */
-.room{position:relative;display:flex;align-items:center;gap:11px;margin:0 0 12px;padding:10px 12px;border-radius:14px;text-decoration:none;color:var(--fg);overflow:hidden;
-  border:1px solid rgba(255,77,94,.5);background:radial-gradient(80% 140% at 0% 0%,rgba(255,154,90,.22),transparent 60%),linear-gradient(120deg,#1E1620,#14111A)}
-.room:active{transform:scale(.985)}
-.room .mic{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(255,77,94,.15);border:1px solid rgba(255,77,94,.55);font-size:21px}
-.room .t{min-width:0;flex:1;display:flex;flex-direction:column}
-.room b{font-family:var(--font-display);font-size:18px;line-height:1.15}
-.room small{font-family:var(--font-mono);font-size:10.5px;color:var(--muted);letter-spacing:.3px}
-.room .live{flex:none;display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:6px;border:1px solid #FF4D5E;color:#FFC2C8;font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px}
-.room .live i{width:6px;height:6px;border-radius:50%;background:#FF4D5E;box-shadow:0 0 6px #FF4D5E;animation:gcb 1.4s infinite}
-.room .faces{display:flex;margin-top:4px}.room .faces img{width:22px;height:22px;border-radius:50%;border:1.5px solid #14111A;margin-left:-6px;background:#2a2230}.room .faces img:first-child{margin-left:0}
 /* ===== In-app Grok quick chat (bottom sheet) ===== */
 html.gc-lock,html.gc-lock body{overflow:hidden}
 .gc-back{position:fixed;inset:0;background:rgba(5,7,10,.62);opacity:0;transition:opacity .2s;z-index:20}
@@ -149,8 +138,8 @@ body.offline .gc-off{display:block}
 .gc-open:active{color:var(--orange-soft)}
 
 /* ===== v9 polish + tap fixes (9 Oct) ===== */
-a,button,.tile,.bot,.room,.qnav a{touch-action:manipulation;cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-.tile *,.bot *,.room *,.qnav a *{pointer-events:none}
+a,button,.tile,.bot,.qnav a{touch-action:manipulation;cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.tile *,.bot *,.qnav a *{pointer-events:none}
 .tile .meter,.tile .meter *{pointer-events:auto}
 body{max-width:720px;margin:0 auto}
 header{margin:2px 2px 14px}
@@ -159,9 +148,6 @@ header .logo{height:46px}
 .qnav a{min-height:64px;justify-content:center;gap:5px;padding:10px 4px;border-radius:14px;font-size:12.5px;
   background:linear-gradient(180deg,#1E2430,#181D26);border-color:#2B3240;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
 .qnav a span{font-size:20px}
-.room{min-height:84px;padding:14px 14px;margin:0 0 18px;border-radius:18px;gap:13px}
-.room .mic{width:52px;height:52px;border-radius:14px;font-size:24px}
-.room b{font-size:20px}
 .label{margin:4px 4px 9px;font-size:11.5px}
 .bots{gap:14px 4px;padding:14px 6px 12px;margin:0 0 18px;border-radius:18px}
 .bot .av{width:60px;height:60px}
@@ -173,24 +159,12 @@ header .logo{height:46px}
 .txt small{font-size:10px;margin-top:2px}
 .meter{width:34px;height:34px;bottom:8px;right:8px}
 .tile.has-meter .txt small{padding-right:36px}
-.tile:active,.qnav a:active,.room:active{transform:scale(.97);transition:transform .08s}
+.tile:active,.qnav a:active{transform:scale(.97);transition:transform .08s}
 .hint{margin:14px 6px 0;line-height:1.5}
 footer{margin:18px 0 6px}
 .txt small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal}
 .txt b{overflow-wrap:normal}
 
-/* ===== two spaces ===== */
-.spaces{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 18px}
-.space{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;min-height:118px;padding:14px;border-radius:18px;text-decoration:none;color:var(--fg);overflow:hidden;touch-action:manipulation}
-.space *{pointer-events:none}
-.space .ic{position:absolute;top:12px;left:14px;font-size:30px;line-height:1}
-.space b{font-family:var(--font-display);font-size:19px;line-height:1.1}
-.space small{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
-.space.steam{border:1px solid rgba(232,184,106,.5);background:radial-gradient(90% 90% at 80% 0%,rgba(255,190,120,.28),transparent 60%),linear-gradient(140deg,#3A271D,#1E1511)}
-.space.meet{border:1px solid rgba(111,231,255,.5);background:radial-gradient(90% 90% at 80% 0%,rgba(111,231,255,.22),transparent 60%),linear-gradient(140deg,#14202A,#0D1117)}
-.space .live{position:absolute;top:12px;right:12px;display:inline-flex;align-items:center;gap:5px;padding:3px 7px;border-radius:6px;border:1px solid #FF4D5E;color:#FFC2C8;font-family:var(--font-mono);font-size:9.5px;letter-spacing:1.4px}
-.space .live i{width:6px;height:6px;border-radius:50%;background:#FF4D5E;animation:gcb 1.4s infinite}
-.space:active{transform:scale(.97)}
 </style>
 </head>
 <body>
@@ -206,12 +180,6 @@ footer{margin:18px 0 6px}
   <a href="club.html#clubCard"><span>🤖</span>Floor</a><a href="club.html#s-team"><span>👥</span>Team</a>
   <a href="club.html#s-business"><span>🏷️</span>Business</a><a href="club.html#s-floor"><span>🕹️</span>Robot</a>
 </nav>
-<div class="spaces">
-<a class="space steam" href="steam.html" aria-label="Open the Steam room">
-  <span class="ic">♨︎</span><b>Steam room</b><small>chill · hang out</small></a>
-<a class="space meet" href="meeting.html" aria-label="Open the Meeting room">
-  <span class="ic">🖥️</span><b>Meeting room</b><small>laser PC · board</small><span class="live"><i></i>LIVE</span></a>
-</div>
 <p class="label"><span>My Bots</span><span>tap to chat · in Club House</span></p>
 <ul class="bots" id="bots"></ul>
 
@@ -223,7 +191,7 @@ footer{margin:18px 0 6px}
 <div class="toast" id="toast" role="status"></div>
 <footer><span>Gold Petal Atelier</span> · Club House (phone)</footer>
 
-<script src="grokchat.js?v=10"></script>
+<script src="grokchat.js?v=11"></script>
 <script>
 // Same order, URLs, badges and colours as the "AI WINDOWS" list.
 const TABS = [
@@ -292,7 +260,7 @@ function net(){document.body.classList.toggle('offline',!navigator.onLine);const
 addEventListener('online',net);addEventListener('offline',net);net();
 function unstick(){ if(window.CHChat) try{CHChat.close();}catch(e){} document.documentElement.classList.remove('gc-lock'); document.querySelectorAll('.gc-back:not(.on)').forEach(b=>b.hidden=true); }
 addEventListener('pageshow',e=>{ if(e.persisted) unstick(); });
-if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=10',{updateViaCache:'none'}).catch(()=>{}));}
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=11',{updateViaCache:'none'}).catch(()=>{}));}
 </script>
 </body>
 </html>

@@ -1,11 +1,11 @@
 // Club House (phone) service worker: keeps the app shell available offline.
 // Only caches this folder's own files. AI sites always open live in the browser.
 // Bot chat (relay /api/chat, POST, another origin) is never cached.
-const CACHE = 'clubhouse-phone-v10'; // v10: Steam room + new Meeting room (laser PC, laser keyboard, board, minutes)
+const CACHE = 'clubhouse-phone-v11'; // v11: Steam room + Meeting room removed
 const NET_TIMEOUT_MS = 3000; // if the network stalls (e.g. China firewall), open from cache after 3 s
 const SHELL = [
-  './', './index.html', './club.html', './meeting.html', './steam.html',
-  './room/ralph.png', './room/millie.png', './room/miranda.png', './room/payal.png', './room/alexa.png', './room/metaads.png', './grokchat.js', './manifest.json', './robots.txt',
+  './', './index.html', './club.html',
+  './grokchat.js', './manifest.json', './robots.txt',
   './apple-touch-icon.png', './atelier-logo.png',
   './bots/ralph.jpg', './bots/alexa.jpg', './bots/miranda.jpg', './bots/priya.jpg', './bots/jack.jpg', './bots/millie.jpg',
   './bots/orange.jpg', './bots/amra.jpg', './bots/metaads.jpg', './bots/orchidwest.jpg', './bots/mellow.jpg', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './favicon.png',
