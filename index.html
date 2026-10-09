@@ -147,6 +147,37 @@ body.offline .gc-off{display:block}
 .gc-passmsg{margin:6px 2px 0;color:#FFD166;font-size:12.5px;min-height:0}.gc-passmsg:empty{display:none}
 .gc-open{flex:none;align-self:center;margin-top:7px;font-family:var(--font-mono);font-size:11px;letter-spacing:.5px;color:var(--muted);text-decoration:none;padding:2px 6px}
 .gc-open:active{color:var(--orange-soft)}
+
+/* ===== v9 polish + tap fixes (9 Oct) ===== */
+a,button,.tile,.bot,.room,.qnav a{touch-action:manipulation;cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.tile *,.bot *,.room *,.qnav a *{pointer-events:none}
+.tile .meter,.tile .meter *{pointer-events:auto}
+body{max-width:720px;margin:0 auto}
+header{margin:2px 2px 14px}
+header .logo{height:46px}
+.qnav{gap:8px;margin:0 0 14px}
+.qnav a{min-height:64px;justify-content:center;gap:5px;padding:10px 4px;border-radius:14px;font-size:12.5px;
+  background:linear-gradient(180deg,#1E2430,#181D26);border-color:#2B3240;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.qnav a span{font-size:20px}
+.room{min-height:84px;padding:14px 14px;margin:0 0 18px;border-radius:18px;gap:13px}
+.room .mic{width:52px;height:52px;border-radius:14px;font-size:24px}
+.room b{font-size:20px}
+.label{margin:4px 4px 9px;font-size:11.5px}
+.bots{gap:14px 4px;padding:14px 6px 12px;margin:0 0 18px;border-radius:18px}
+.bot .av{width:60px;height:60px}
+.grid{gap:10px}
+.tile{min-height:74px;padding:12px 12px 12px 12px;gap:12px;border-radius:16px;
+  background:linear-gradient(180deg,#1E2430,#181D26);border-color:#2B3240;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.badge{width:44px;height:44px;border-radius:12px;font-size:18px}
+.txt b{font-size:16.5px;font-weight:600}
+.txt small{font-size:10px;margin-top:2px}
+.meter{width:34px;height:34px;bottom:8px;right:8px}
+.tile.has-meter .txt small{padding-right:36px}
+.tile:active,.qnav a:active,.room:active{transform:scale(.97);transition:transform .08s}
+.hint{margin:14px 6px 0;line-height:1.5}
+footer{margin:18px 0 6px}
+.txt small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal}
+.txt b{overflow-wrap:normal}
 </style>
 </head>
 <body>
@@ -179,7 +210,7 @@ body.offline .gc-off{display:block}
 <div class="toast" id="toast" role="status"></div>
 <footer><span>Gold Petal Atelier</span> · Club House (phone)</footer>
 
-<script src="grokchat.js"></script>
+<script src="grokchat.js?v=9"></script>
 <script>
 // Same order, URLs, badges and colours as the "AI WINDOWS" list.
 const TABS = [
@@ -246,7 +277,9 @@ grid.innerHTML=TABS.map(t=>{
 document.getElementById('count').textContent=TABS.length+' shops';
 function net(){document.body.classList.toggle('offline',!navigator.onLine);const p=document.getElementById('pillText');if(p)p.textContent=navigator.onLine?'Idle':'Offline';}
 addEventListener('online',net);addEventListener('offline',net);net();
-if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
+function unstick(){ if(window.CHChat) try{CHChat.close();}catch(e){} document.documentElement.classList.remove('gc-lock'); document.querySelectorAll('.gc-back:not(.on)').forEach(b=>b.hidden=true); }
+addEventListener('pageshow',e=>{ if(e.persisted) unstick(); });
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=9',{updateViaCache:'none'}).catch(()=>{}));}
 </script>
 </body>
 </html>

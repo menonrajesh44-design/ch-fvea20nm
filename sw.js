@@ -1,7 +1,7 @@
 // Club House (phone) service worker: keeps the app shell available offline.
 // Only caches this folder's own files. AI sites always open live in the browser.
 // Bot chat (relay /api/chat, POST, another origin) is never cached.
-const CACHE = 'clubhouse-phone-v8'; // v8: podcast Meeting room (meeting.html + room/ robots)
+const CACHE = 'clubhouse-phone-v9'; // v9: tap fix: never swap a page for Home; navigations network-first, own-page cache fallback only
 const NET_TIMEOUT_MS = 3000; // if the network stalls (e.g. China firewall), open from cache after 3 s
 const SHELL = [
   './', './index.html', './club.html', './meeting.html',
@@ -24,18 +24,24 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const req = e.request;
   const url = new URL(req.url);
-  // Never touch bot chat calls: the relay (/api/…) is always live, never cached.
-  if (url.pathname.includes('/api/')) return;
+  if (url.pathname.includes('/api/')) return;               // bot chat relay: always live
   if (req.method !== 'GET' || url.origin !== self.location.origin) return;
-  // Network first (so updates show up), but give up after NET_TIMEOUT_MS and use the cached copy,
-  // so the Home Screen app still opens instantly when github.io is slow or disrupted.
-  const network = fetch(req).then(res => {
-    if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
-    return res;
-  });
-  const cached = () => caches.match(req).then(r => r || caches.match('./index.html'));
-  const timeout = new Promise(resolve => setTimeout(resolve, NET_TIMEOUT_MS)).then(cached);
-  e.respondWith(
-    Promise.race([network.catch(cached), timeout.then(r => r || network)])
-  );
+  const put = res => { if (res && res.ok && res.type === 'basic') { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); } return res; };
+  const fromCache = () => caches.match(req, { ignoreSearch: true });
+  if (req.mode === 'navigate') {
+    // Pages: live first. If slow (>3 s) use THIS page's cached copy (never Home in its place).
+    e.respondWith(new Promise(resolve => {
+      let done = false;
+      const net = fetch(req).then(put);
+      const t = setTimeout(() => fromCache().then(r => { if (r && !done) { done = true; resolve(r); } }), NET_TIMEOUT_MS);
+      net.then(r => { if (!done) { done = true; clearTimeout(t); resolve(r); } })
+         .catch(() => fromCache().then(r => { if (!done) { done = true; clearTimeout(t); resolve(r || caches.match('./index.html').then(x => x || Response.error())); } }));
+    }));
+    return;
+  }
+  // Files (images, fonts, js): cache first for speed, refresh in background.
+  e.respondWith(fromCache().then(r => {
+    const net = fetch(req).then(put).catch(() => r || Response.error());
+    return r || net;
+  }));
 });
