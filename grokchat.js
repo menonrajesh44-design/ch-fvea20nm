@@ -13,7 +13,8 @@
   const PREFIX = 'ch.dubai.chat.';
   const CFG = 'ch.dubai.chatcfg.';
   const SNAP_KEY = 'ch.dubai.chatbackup.before-restore';
-  const BOT_IDS = ['ralph', 'alexa', 'miranda', 'priya', 'jack', 'millie', 'orange', 'amra', 'metaads', 'orchidwest', 'mellow'];
+  const BOT_IDS = ['ralph', 'alexa', 'miranda', 'priya', 'millie', 'orange', 'amra', 'metaads', 'orchidwest', 'mellow'];
+  const RETIRED_IDS = ['jack'];   // 9 Oct 2026: Jack fired (Raj). Off quick chat; old backups that hold his chat still validate, his part is ignored. Nothing is deleted.
   const KEEP_PER_BOT = 200;   // messages kept on the phone per bot
   const SEND_TURNS = 12;      // messages sent to the relay (it trims to 12 too)
   const MAX_INPUT = 2000;
@@ -76,6 +77,7 @@
   function validate(v) {
     if (!v || v.format !== 'ch-dubai-grok-chats' || v.version !== 1 || !v.chats || typeof v.chats !== 'object') throw new Error('Unsupported bot chat backup.');
     for (const k of Object.keys(v.chats)) {
+      if (RETIRED_IDS.includes(k)) continue;
       if (!BOT_IDS.includes(k)) throw new Error('Unknown bot in chat backup.');
       const list = v.chats[k];
       if (!Array.isArray(list) || list.length > KEEP_PER_BOT || !list.every(isMsg)) throw new Error('Invalid chat for ' + k + '.');
