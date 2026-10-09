@@ -1,7 +1,7 @@
 // Club House (phone) service worker: keeps the app shell available offline.
 // Only caches this folder's own files. AI sites always open live in the browser.
 // Bot chat (relay /api/chat, POST, another origin) is never cached.
-const CACHE = 'clubhouse-phone-v12'; // v12: Club Team (Who does what) + Jobs board removed
+const CACHE = 'clubhouse-phone-v13'; // v13: Meeting room inside the Club page (centre column)
 const NET_TIMEOUT_MS = 3000; // if the network stalls (e.g. China firewall), open from cache after 3 s
 const SHELL = [
   './', './index.html', './club.html',
