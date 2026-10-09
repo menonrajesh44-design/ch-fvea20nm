@@ -1,7 +1,7 @@
 // Club House (phone) service worker: keeps the app shell available offline.
 // Only caches this folder's own files. AI sites always open live in the browser.
 // Bot chat (relay /api/chat, POST, another origin) is never cached.
-const CACHE = 'clubhouse-phone-v14'; // v14: Jail panel (Jack) on Home + Club page
+const CACHE = 'clubhouse-phone-v15'; // v15: Home = the same Club House page as the Mac app (Jail top, Meeting centre)
 const NET_TIMEOUT_MS = 3000; // if the network stalls (e.g. China firewall), open from cache after 3 s
 const SHELL = [
   './', './index.html', './club.html',
