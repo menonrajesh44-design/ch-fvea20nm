@@ -165,6 +165,82 @@ footer{margin:18px 0 6px}
 .txt small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal}
 .txt b{overflow-wrap:normal}
 
+/* ===== Jail (9 Oct 2026) ===== */
+.jail { padding:16px 18px; gap:12px; background: linear-gradient(180deg,#15181F,#0F1116); border-color:#2A2F39; }
+.jail h2 { display:flex; align-items:center; gap:8px; }
+.jail h2 .lk { width:22px; height:22px; border-radius:7px; display:grid; place-items:center; background:rgba(255,90,95,.10); border:1px solid rgba(255,90,95,.35); }
+.jail h2 .lk svg { width:12px; height:12px; stroke:#FF8A8F; fill:none; stroke-width:2; stroke-linecap:round; }
+.jail-row { display:flex; align-items:center; gap:14px; }
+.cell { position:relative; flex:none; width:104px; height:124px; border-radius:12px; overflow:hidden;
+  background: radial-gradient(90% 70% at 50% 25%, #CFEFFF 0%, #7FB9DA 38%, #2D5873 75%, #142A3A 100%);
+  box-shadow: inset 0 0 0 1px rgba(200,240,255,.55), inset 0 -20px 26px rgba(8,24,36,.55), 0 0 18px -4px rgba(140,210,255,.45); }
+.cell::before { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; border-radius:12px;
+  background: radial-gradient(1.2px 1.2px at 12% 20%, rgba(255,255,255,.9), transparent 60%), radial-gradient(1px 1px at 78% 34%, rgba(255,255,255,.8), transparent 60%),
+    radial-gradient(1.4px 1.4px at 40% 72%, rgba(255,255,255,.7), transparent 60%), radial-gradient(1px 1px at 88% 80%, rgba(255,255,255,.8), transparent 60%),
+    radial-gradient(60% 40% at 0% 100%, rgba(235,250,255,.55), transparent 70%), radial-gradient(60% 40% at 100% 100%, rgba(235,250,255,.5), transparent 70%),
+    radial-gradient(50% 30% at 0% 0%, rgba(235,250,255,.45), transparent 70%), radial-gradient(50% 30% at 100% 0%, rgba(235,250,255,.45), transparent 70%); }
+.cell img { position:absolute; left:50%; top:40%; width:92px; height:92px; transform:translate(-50%,-50%); object-fit:cover; border-radius:50%;
+  filter: grayscale(1) brightness(.92) contrast(.95) sepia(.25) hue-rotate(160deg) saturate(1.6); }
+@keyframes shiver { 0%,58%,100% { transform:translate(-50%,-50%) } 60% { transform:translate(calc(-50% - .8px),-50%) } 62% { transform:translate(calc(-50% + .8px),-50%) } 64% { transform:translate(calc(-50% - .7px),-50%) } 66% { transform:translate(calc(-50% + .6px),-50%) } 68% { transform:translate(calc(-50% - .4px),-50%) } 70% { transform:translate(-50%,-50%) } }
+.cell .bars { position:absolute; inset:0; z-index:2; background: repeating-linear-gradient(90deg, transparent 0 9px, #EAF7FF 9px 10px, #9FC3D8 10px 11.5px, #5E8299 11.5px 12px, transparent 12px 15px); opacity:.95; }
+.cell .bars::before, .cell .bars::after { content:''; position:absolute; left:0; right:0; height:5px; background: linear-gradient(180deg,#F4FBFF,#A9CDE2 55%,#5E8299); box-shadow: 0 1px 3px rgba(0,20,40,.55), 0 0 6px rgba(220,245,255,.6); }
+.cell .bars::before { top:10px } .cell .bars::after { bottom:12px }
+.icicles { position:absolute; left:0; right:0; top:15px; height:12px; z-index:3; pointer-events:none;
+  background: linear-gradient(180deg, rgba(240,251,255,.95), rgba(190,230,250,.75));
+  clip-path: polygon(0 0,100% 0,100% 18%,96% 18%,93% 70%,90% 18%,84% 18%,81% 100%,78% 18%,70% 18%,67% 60%,64% 18%,56% 18%,53% 90%,50% 18%,42% 18%,39% 55%,36% 18%,28% 18%,25% 85%,22% 18%,14% 18%,11% 62%,8% 18%,0 18%); filter: drop-shadow(0 1px 1px rgba(0,30,50,.4)); }
+.snow { position:absolute; inset:0; z-index:3; pointer-events:none; overflow:hidden; }
+.snow i { position:absolute; top:-6px; width:3px; height:3px; border-radius:50%; background:#fff; opacity:.85; box-shadow:0 0 3px rgba(255,255,255,.9); animation: snowfall linear infinite; }
+.snow i:nth-child(1){left:8%;animation-duration:5.5s;animation-delay:-1s}.snow i:nth-child(2){left:24%;width:2px;height:2px;animation-duration:7s;animation-delay:-3s}
+.snow i:nth-child(3){left:41%;animation-duration:6.2s;animation-delay:-4.5s}.snow i:nth-child(4){left:58%;width:2px;height:2px;animation-duration:5s;animation-delay:-2s}
+.snow i:nth-child(5){left:73%;animation-duration:6.8s;animation-delay:-.5s}.snow i:nth-child(6){left:89%;width:2px;height:2px;animation-duration:5.8s;animation-delay:-3.6s}
+.snow i:nth-child(7){left:33%;width:2px;height:2px;animation-duration:8s;animation-delay:-6s}.snow i:nth-child(8){left:66%;animation-duration:7.4s;animation-delay:-5s}
+@keyframes snowfall { 0% { transform: translate(0,0) } 50% { transform: translate(4px,66px) } 100% { transform: translate(-2px,132px) } }
+.fog { position:absolute; z-index:2; left:58%; top:46%; width:26px; height:16px; border-radius:50%; pointer-events:none; background: radial-gradient(closest-side, rgba(245,252,255,.75), rgba(245,252,255,0)); filter: blur(1.5px); opacity:0; animation: breath 3.2s ease-out infinite; }
+@keyframes breath { 0%,40% { opacity:0; transform: translate(0,0) scale(.4) } 55% { opacity:.85 } 100% { opacity:0; transform: translate(10px,-8px) scale(1.4) } }
+.jail h2 .lk { background: rgba(140,210,255,.10); border-color: rgba(140,210,255,.40); }
+.jail h2 .lk svg { stroke:#BFE8FF; }
+.jail { background: radial-gradient(120% 80% at 0% 0%, rgba(140,210,255,.10), transparent 55%), linear-gradient(180deg,#141A22,#0E1218); border-color:#2A3A4A; }
+/* frozen solid: robot in an ice block, whole cell iced over */
+.iceblock { position:absolute; z-index:2; left:9px; right:9px; top:12px; bottom:20px; border-radius:10px; pointer-events:none;
+  background: linear-gradient(135deg, rgba(235,250,255,.55) 0%, rgba(190,232,252,.22) 28%, rgba(160,215,245,.14) 55%, rgba(225,246,255,.42) 100%);
+  box-shadow: inset 0 0 0 1.5px rgba(240,252,255,.75), inset 0 0 14px rgba(255,255,255,.55), inset 6px 6px 10px rgba(255,255,255,.35), 0 0 10px rgba(170,225,255,.5);
+  backdrop-filter: blur(.6px) saturate(1.2); -webkit-backdrop-filter: blur(.6px) saturate(1.2); }
+.iceblock::before { content:''; position:absolute; left:12%; top:8%; width:30%; height:46%; border-radius:6px; background: linear-gradient(160deg, rgba(255,255,255,.75), rgba(255,255,255,0) 70%); transform: skewX(-12deg); }
+.iceblock::after { content:''; position:absolute; inset:0; border-radius:10px;
+  background: linear-gradient(118deg, transparent 46%, rgba(255,255,255,.7) 47%, transparent 48.5%), linear-gradient(64deg, transparent 62%, rgba(255,255,255,.55) 63%, transparent 64%), linear-gradient(150deg, transparent 22%, rgba(255,255,255,.45) 23%, transparent 24%); }
+.frostglass { position:absolute; inset:0; z-index:3; pointer-events:none; border-radius:12px;
+  box-shadow: inset 0 0 0 2px rgba(240,252,255,.7), inset 0 0 22px rgba(235,250,255,.8);
+  background: radial-gradient(45% 30% at 0% 0%, rgba(245,252,255,.7), transparent 70%), radial-gradient(45% 30% at 100% 0%, rgba(245,252,255,.65), transparent 70%),
+    radial-gradient(55% 35% at 0% 100%, rgba(245,252,255,.75), transparent 70%), radial-gradient(55% 35% at 100% 100%, rgba(245,252,255,.75), transparent 70%); }
+.cell .bars { filter: drop-shadow(0 0 1.5px rgba(240,252,255,.9)); }
+.placard { background: linear-gradient(180deg,#F5FBFF,#DCEEF8) !important; box-shadow: 0 3px 8px rgba(0,20,40,.55), inset 0 0 0 1px rgba(150,200,230,.6), inset 0 0 8px rgba(255,255,255,.95), inset 0 -3px 6px rgba(170,215,240,.6) !important; }
+.placard::before, .placard::after { background: linear-gradient(180deg,#E9F7FF,#8FB6CC) !important; box-shadow: inset 0 0 0 1px rgba(255,255,255,.7), 0 1px 2px rgba(0,30,50,.5), 0 0 4px rgba(220,245,255,.8) !important; }
+.placard .frost { position:absolute; inset:0; border-radius:4px; pointer-events:none;
+  background: radial-gradient(40% 60% at 0% 0%, rgba(255,255,255,.9), transparent 70%), radial-gradient(40% 60% at 100% 100%, rgba(255,255,255,.85), transparent 70%),
+    radial-gradient(1px 1px at 20% 80%, #fff, transparent), radial-gradient(1px 1px at 80% 20%, #fff, transparent); mix-blend-mode: screen; }
+.placard { position:absolute; }
+@media (prefers-reduced-motion: reduce) { .cell img, .snow i, .fog { animation:none !important; } .fog { opacity:0 } }
+.placard { position:absolute; z-index:4; left:50%; bottom:9px; width:86px; padding:4px 4px 3px; transform: translateX(-50%) rotate(-2.5deg); border-radius:4px;
+  background: linear-gradient(180deg,#FBFAF6,#E9E6DD); box-shadow: 0 3px 8px rgba(0,0,0,.55), inset 0 0 0 1px rgba(0,0,0,.18);
+  font: 800 10px/1.05 -apple-system,BlinkMacSystemFont,'SF Pro Display','Inter',sans-serif; letter-spacing:.6px; text-align:center; color:#1B1B1F; text-transform:uppercase; }
+.placard b { display:block; color:#B3161E; font-size:12.5px; letter-spacing:.9px; font-weight:900; }
+.placard::before, .placard::after { content:''; position:absolute; bottom:4px; width:11px; height:14px; border-radius:6px; background: linear-gradient(180deg,#9AA0AA,#5C626C); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 1px 2px rgba(0,0,0,.5); }
+.placard::before { left:-6px; } .placard::after { right:-6px; }
+.jail-m { min-width:0; flex:1; display:flex; flex-direction:column; gap:4px; }
+.jail-m b { font-size:15px; color:#B9C0CB; }
+.jail-m small { font-family: var(--font-mono); font-size:10.5px; letter-spacing:1px; text-transform:uppercase; color:#6C7482; }
+.charge { margin-top:2px; padding:8px 10px; border-radius:9px; background: rgba(255,90,95,.07); border:1px solid rgba(255,90,95,.25); color:#FFC2C4; font-size:12.5px; line-height:1.45; }
+.charge em { display:block; font-style:normal; font-family: var(--font-mono); font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:#FF8A8F; margin-bottom:2px; }
+.ruling { padding:7px 10px; border-radius:9px; background: rgba(255,255,255,.03); border:1px solid #2E3440; color:#C9D0DA; font-size:12.5px; line-height:1.45; }
+.ruling em { display:block; font-style:normal; font-family: var(--font-mono); font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:#9AA4B2; margin-bottom:2px; }
+.jail-left { display:inline-flex; margin-left:4px; padding:1px 7px; border-radius:6px; font-family: var(--font-mono); font-size:10.5px; letter-spacing:.6px; color:#FFD9B0; background: rgba(255,122,26,.10); border:1px solid rgba(255,122,26,.30); white-space:nowrap; }
+.jail-left.wait { color:#FFC2C4; background: rgba(255,90,95,.10); border-color: rgba(255,90,95,.35); }
+.jail-m .ruling, .jail-m .charge { margin-top:2px; }
+.jail-note { margin:0; font-size:11.5px; color:#6C7482; }
+.jail { display:flex; flex-direction:column; margin:0 0 14px; border:1px solid #2A3A4A; border-radius:18px; }
+.jail h2 { margin:0; font-size:17px; color:#E9EDF3; }
+.jail h2 small { font-family:var(--font-mono); font-size:10.5px; letter-spacing:1.2px; text-transform:uppercase; color:#9AA4B2; font-weight:400; }
+.jail .jail-m { gap:5px; }
 </style>
 </head>
 <body>
@@ -179,6 +255,20 @@ footer{margin:18px 0 6px}
   <a href="club.html#s-memory"><span>🧠</span>Memory</a><a href="club.html#clubCard"><span>🤖</span>Floor</a>
   <a href="club.html#s-business"><span>🏷️</span>Business</a><a href="club.html#s-floor"><span>🕹️</span>Robot</a>
 </nav>
+<!-- Jail: always visible on Home (Raj, 9 Oct 2026) -->
+<section class="jail" id="jailCard" aria-label="Jail">
+      <h2><span class="lk" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>Jail <small>1 inside</small></h2>
+      <div class="jail-row">
+        <div class="cell"><img alt="" src="bots/jack.jpg" width="92" height="92"><i class="iceblock"></i><i class="bars"></i><i class="frostglass"></i><i class="icicles"></i><span class="snow"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="placard" role="img" aria-label="Placard: I am a criminal">I am a<b>Criminal</b><i class="frost"></i></span></div>
+        <div class="jail-m">
+          <b>Jack</b><small>Sourcing · suspended</small>
+          <div class="charge"><em>Charge</em>Major crime: misleading Raj, endangering Gold Petal - 9 Oct 2026</div>
+          <div class="ruling"><em>Term</em>Term: 3 weeks - release review 30 Oct 2026 <span class="jail-left" id="jailLeft"></span></div>
+          <div class="ruling"><em>Ruling</em>Ruling locked by Amra - permanent firing, 12 black points</div>
+        </div>
+      </div>
+      <p class="jail-note">Frozen solid · permanent record and a reminder to every bot: no errors, no misleading Raj.</p>
+    </section>
 <p class="label"><span>My Bots</span><span>tap to chat · in Club House</span></p>
 <ul class="bots" id="bots"></ul>
 
@@ -190,7 +280,7 @@ footer{margin:18px 0 6px}
 <div class="toast" id="toast" role="status"></div>
 <footer><span>Gold Petal Atelier</span> · Club House (phone)</footer>
 
-<script src="grokchat.js?v=13"></script>
+<script src="grokchat.js?v=14"></script>
 <script>
 // Same order, URLs, badges and colours as the "AI WINDOWS" list.
 const TABS = [
@@ -209,13 +299,12 @@ const TABS = [
   {name:"CapCut",             url:"https://www.capcut.com/editor",           badge:"Cc", color:"#F2F2F2"},
   {name:"InShot",             url:"https://inshot.com/",                     badge:"In", color:"#FF4F6D"}
 ];
-// My Bots: same 11 crew bots, colours and Grok Bot chat links as the Mac Club House (GP_CHAT, 3 Oct).
+// My Bots: 10 crew bots (Jack is in Jail since 9 Oct 2026), colours and Grok Bot chat links as the Mac Club House (GP_CHAT, 3 Oct).
 const BOTS = [
   {id:"ralph",      name:"Ralph",       role:"IT",            color:"#3BA4FF", agent:"f8e4a8fb-5872-4125-af16-c7856905afda"},
   {id:"alexa",      name:"Alexa",       role:"Research",      color:"#FF6FA3", agent:"5bcbb9d6-42f0-46dc-8cca-7180789c0fcb"},
   {id:"miranda",    name:"Miranda",     role:"Sales",         color:"#2FD18B", agent:"e6dd15c9-3668-485b-a56c-1137af4f6dc2"},
   {id:"priya",      name:"Priya",       role:"Sales support", color:"#A77BFF", agent:"b2791c6f-676f-4bc0-aed2-8251f495a176"},
-  {id:"jack",       name:"Jack",        role:"Sourcing",      color:"#6F8CFF", agent:"eafd86dd-a751-4c23-a1c4-f159a691a0c1"},
   {id:"millie",     name:"Millie",      role:"SMS",           color:"#2FD3C8", agent:"f22aa575-ceca-486f-b922-69b2f9c55230"},
   {id:"orange",     name:"Orange",      role:"Accounts",      color:"#FF9F1C", agent:"f9a452e5-6439-4eb8-b51c-1902bf00652e"},
   {id:"amra",       name:"Amra",        role:"Legal",         color:"#8B6CFF", agent:"bcceb2ce-9210-4e9c-a909-e19a8c3908e6"},
@@ -259,7 +348,22 @@ function net(){document.body.classList.toggle('offline',!navigator.onLine);const
 addEventListener('online',net);addEventListener('offline',net);net();
 function unstick(){ if(window.CHChat) try{CHChat.close();}catch(e){} document.documentElement.classList.remove('gc-lock'); document.querySelectorAll('.gc-back:not(.on)').forEach(b=>b.hidden=true); }
 addEventListener('pageshow',e=>{ if(e.persisted) unstick(); });
-if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=13',{updateViaCache:'none'}).catch(()=>{}));}
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=14',{updateViaCache:'none'}).catch(()=>{}));}
+</script>
+<script>
+// Jail countdown (term 9-30 Oct 2026). No automatic release: after 30 Oct it waits for Raj.
+(function () {
+  var el = document.getElementById('jailLeft'); if (!el) return;
+  var REVIEW = Date.parse('2026-10-30T00:00:00+04:00');
+  function tick() {
+    var today = Date.parse(new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Dubai' }) + 'T00:00:00+04:00');
+    var d = Math.round((REVIEW - today) / 86400000);
+    if (d > 0) { el.textContent = d + (d === 1 ? ' day left' : ' days left'); el.classList.remove('wait'); }
+    else if (d === 0) { el.textContent = 'Release review today'; el.classList.remove('wait'); }
+    else { el.textContent = "Awaiting Raj's decision"; el.classList.add('wait'); }
+  }
+  tick(); setInterval(tick, 60000);
+})();
 </script>
 </body>
 </html>
