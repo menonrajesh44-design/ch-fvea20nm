@@ -162,8 +162,6 @@ kbd { font-family: var(--font-mono); font-size: 12px; padding: 1px 6px; border-r
 .msg .who { display: block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--cyan); margin-bottom: 3px; }
 .msg.thinking { color: var(--muted); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.team { gap: 18px; }
-.team-head .note { max-width: 70ch; }
 .members { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
 @media (max-width: 560px) { .members { grid-template-columns: minmax(0, 1fr); } }
 .member { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 10px; align-items: start; padding: 12px; border-radius: 14px; background: var(--panel-2); border: 1px solid var(--line); }
@@ -172,26 +170,6 @@ kbd { font-family: var(--font-mono); font-size: 12px; padding: 1px 6px; border-r
 .member .role { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
 .member .where { margin-top: 4px; font-family: var(--font-mono); font-size: 11px; color: var(--cyan); overflow-wrap: anywhere; }
 .member .open { margin-top: 4px; font-family: var(--font-mono); font-size: 11px; color: var(--warn); }
-.jobs-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
-.addjob { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px; }
-@media (max-width: 600px) { .addjob { grid-template-columns: minmax(0, 1fr); } }
-.addjob input, .addjob select, .job textarea { font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; min-width: 0; }
-.addjob button { padding: 0 16px; min-height: 44px; font-weight: 600; background: var(--orange); border-color: var(--orange); color: #1A0E04; }
-.board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; }
-@media (max-width: 900px) { .board { grid-template-columns: minmax(0, 1fr); } }
-.lane { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 12px; min-width: 0; }
-.lane h3 { margin: 0 0 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; }
-.lane ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.job { padding: 12px; border-radius: 12px; background: var(--panel-2); border: 1px solid var(--line); border-left: 4px solid var(--who, var(--orange)); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.job .t { font-weight: 600; overflow-wrap: anywhere; }
-.job .d { font-size: 13px; color: var(--muted); white-space: pre-wrap; overflow-wrap: anywhere; }
-.job .who { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--who, var(--orange)); }
-.job .res { font-size: 13px; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; max-height: 180px; overflow-y: auto; }
-.job .acts { display: flex; flex-wrap: wrap; gap: 6px; }
-.job .acts button { padding: 6px 10px; font-size: 12.5px; border-radius: 999px; min-height: 34px; }
-.job .acts .go { background: var(--orange); border-color: var(--orange); color: #1A0E04; font-weight: 600; }
-.job textarea { width: 100%; min-height: 80px; resize: vertical; font-size: 13px; }
-.job .copied { font-size: 12px; color: var(--good); }
 .cooling { gap: 12px; }
 .under-floor { margin-top: -14px; padding: 14px; }
 .under-floor .cool-head h2 { font-size: 18px; }
@@ -410,7 +388,7 @@ header{gap:8px;flex-wrap:nowrap}
 .pill{font-size:11px;padding:4px 10px}
 .card,.arena,.controls{padding:12px;gap:10px;border-radius:14px}
 .assist,.grid,.col{gap:10px}
-.card h2,.club-head h2,.team-head h2,.jobs-head h2{font-size:18px;margin:0}
+.card h2,.club-head h2{font-size:18px;margin:0}
 .ztag{font-size:9px;letter-spacing:.6px;left:8px;top:8px;padding:3px 6px}.hq{right:8px;top:6px;padding:4px 6px;font-size:9px;letter-spacing:.4px;gap:4px}.hq svg{width:18px;height:16px}.ro dd{font-size:14px;white-space:normal;overflow:visible}.ro{padding:6px 8px}
 .chat{height:auto;min-height:110px;max-height:260px}
 .chips{gap:6px}.chips button{padding:6px 10px;font-size:12.5px}
@@ -423,7 +401,6 @@ header{gap:8px;flex-wrap:nowrap}
 .gp-row{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 6px}
 .gp-pic{max-width:64px}
 .gp-bot b{font-size:13px}.gp-bot small{font-size:9.5px}
-.board{gap:8px}.lane{padding:10px}
 .czone{height:360px}.czone.stage{height:400px;min-height:400px}
 .bot2{width:76px;margin-left:-38px}
 .bot2 .nt{max-width:88px;padding:2px 6px;justify-content:center}.bot2 .nt img{display:none}.bot2 .nt b{font-size:10.5px;white-space:normal;overflow:visible;text-overflow:clip;text-align:center;line-height:1.1}.bot2 .rl{display:none}
@@ -433,7 +410,7 @@ header{gap:8px;flex-wrap:nowrap}
 .case3d{transform:none!important}
 @media (max-width:360px){.gp-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
-<nav class="pnav" aria-label="Sections"><a class="home" href="./">‹ Home</a><a href="#s-codex">Codex</a><a href="#s-tasks">Tasks</a><a href="#s-memory">Memory</a><a href="#s-business">Business</a><a href="#clubCard">Floor</a><a href="#s-jobs">Jobs</a><a href="#s-team">Team</a><a href="#s-floor">Robot</a></nav>
+<nav class="pnav" aria-label="Sections"><a class="home" href="./">‹ Home</a><a href="#s-codex">Codex</a><a href="#s-tasks">Tasks</a><a href="#s-memory">Memory</a><a href="#s-business">Business</a><a href="#clubCard">Floor</a><a href="#s-floor">Robot</a></nav>
 <div class="wrap">
   <header>
     <div class="brand">
@@ -574,30 +551,6 @@ header{gap:8px;flex-wrap:nowrap}
     </div>
   </section>
 
-  <section class="team card" aria-label="Club team" id="s-team">
-    <div class="team-head">
-      <h2>Club team <small>Who does what</small></h2>
-      <p class="note">Codex plans the work and hands out jobs. Codex can't talk to the other members directly: for their jobs, copy the instruction, paste it into their app, then paste their answer back here.</p>
-    </div>
-    <div class="members" id="members"></div>
-
-    <div class="jobs-head" id="s-jobs">
-      <h2>Job board <small id="jobCount">0 jobs</small></h2>
-      <div class="chips"><button type="button" id="planBtn" data-p="Look at my business profile and tasks, then plan this week's work for Gold Petal Atelier and split it into jobs for the club team. Give each job to the member best suited to it.">Ask Codex to plan and share out jobs</button></div>
-    </div>
-    <form class="addjob" id="addJob">
-      <input id="jobTitle" type="text" placeholder="New job, e.g. Write 5 Instagram captions for preserved roses" aria-label="New job">
-      <label class="sr" for="jobOwner">Give to</label>
-      <select id="jobOwner" aria-label="Give to"></select>
-      <button type="submit">Add job</button>
-    </form>
-    <div class="board">
-      <div class="lane" data-lane="todo"><h3>To do <span id="cnt-todo">0</span></h3><ul id="lane-todo"></ul></div>
-      <div class="lane" data-lane="doing"><h3>Doing <span id="cnt-doing">0</span></h3><ul id="lane-doing"></ul></div>
-      <div class="lane" data-lane="done"><h3>Done <span id="cnt-done">0</span></h3><ul id="lane-done"></ul></div>
-    </div>
-    <p class="empty" id="jobsEmpty">No jobs yet. Add one above, or ask Codex to plan the week and share out jobs.</p>
-  </section>
 
   <div class="grid">
     <div class="col">
@@ -1393,75 +1346,26 @@ window.GP_CHAT = (function () {
   $('bizBox').addEventListener('input', function () { $('bizCount').textContent = $('bizBox').value.length.toLocaleString() + ' / ' + BIZ_MAX.toLocaleString(); });
 
 
-  // ================= Club team & job board =================
-  function robotSVG(c, c2) {
-    return '<svg viewBox="0 0 54 66" aria-hidden="true"><rect x="25" y="1" width="4" height="8" rx="2" fill="#5B6678"/><circle cx="27" cy="2.5" r="3" fill="#7FF2FF"/>' +
-      '<rect x="8" y="8" width="38" height="26" rx="10" fill="' + c + '"/><rect x="13" y="13" width="28" height="15" rx="7" fill="#0A1220"/>' +
-      '<rect x="17" y="17" width="7" height="5" rx="2.5" fill="#7FF2FF"/><rect x="30" y="17" width="7" height="5" rx="2.5" fill="#7FF2FF"/>' +
-      '<rect x="22" y="34" width="10" height="4" fill="#3A4252"/><rect x="11" y="38" width="32" height="18" rx="5" fill="' + c + '"/>' +
-      '<rect x="17" y="41" width="20" height="10" rx="2" fill="#071018"/><polyline points="19,47 23,47 25,43 28,50 30,46 35,46" fill="none" stroke="#7FF2FF" stroke-width="1.2"/>' +
-      '<rect x="4" y="40" width="6" height="14" rx="3" fill="' + c2 + '"/><rect x="44" y="40" width="6" height="14" rx="3" fill="' + c2 + '"/>' +
-      '<rect x="16" y="56" width="8" height="9" rx="3" fill="#3A4252"/><rect x="30" y="56" width="8" height="9" rx="3" fill="#3A4252"/></svg>';
-  }
+  // ================= Club team (UI removed 9 Oct; headless jobs for Codex tools) =================
   var MEMBERS = [
-    { id: 'bolt', name: 'Codex', color: '#F8FAFC', c2: '#8FA3B6', app: 'here', role: 'Club leader. Plans work, keeps tasks and memory, and does his own jobs right on this page.', where: 'This page' },
-    { id: 'chatgpt', name: 'ChatGPT', color: '#10A37F', c2: '#0B7A60', app: 'the ChatGPT app', role: 'Writing help and second opinions, in the ChatGPT app.', where: 'Desktop › Codex/ChatGPT' },
-    { id: 'amra', name: 'Amra (Grok)', color: '#8B6CFF', c2: '#6A4FD9', app: 'the Grok Bot app', role: 'Your Grok bot. Ideas, research and rules, in the Grok Bot app.', where: 'Via you (copy & paste)' },
-    { id: 'ralph', name: 'Ralph', color: '#3BA4FF', c2: '#2A7FCC', app: 'Ralph', role: 'Hands-on Mac help: setting things up and checking safety.', where: 'Desktop › Bolt-Ralph Shared' },
-    { id: 'elevenlabs', name: 'ElevenLabs Hub', color: '#FF5C9A', c2: '#D9407A', app: 'ElevenLabs', role: 'Voice-overs, spoken messages and audio for videos and ads.', where: 'Desktop › ElevenLabs Hub' },
-    { id: 'runway', name: 'Runway Hub', color: '#F5C518', c2: '#C99F0A', app: 'Runway', role: 'AI video: product clips, reels and short ads.', where: 'Desktop › Runway Hub' },
-    { id: 'gemini', name: 'Gemini Hub', color: '#4D7CFF', c2: '#3459D9', app: 'Gemini', role: 'Research, Google Docs and Sheets help, second opinions.', where: 'Desktop › Gemini Hub' }
+    { id: 'bolt', name: 'Codex', color: '#F8FAFC', c2: '#8FA3B6', app: 'here', role: 'Club leader.', where: 'This page' },
+    { id: 'chatgpt', name: 'ChatGPT', color: '#10A37F', c2: '#0B7A60', app: 'the ChatGPT app', role: 'Writing help.', where: 'Desktop › Codex/ChatGPT' },
+    { id: 'amra', name: 'Amra (Grok)', color: '#8B6CFF', c2: '#6A4FD9', app: 'the Grok Bot app', role: 'Grok bot.', where: 'Via you (copy & paste)' },
+    { id: 'ralph', name: 'Ralph', color: '#3BA4FF', c2: '#2A7FCC', app: 'Ralph', role: 'Mac help.', where: 'Desktop › Bolt-Ralph Shared' },
+    { id: 'elevenlabs', name: 'ElevenLabs Hub', color: '#FF5C9A', c2: '#D9407A', app: 'ElevenLabs', role: 'Voice-overs.', where: 'Desktop › ElevenLabs Hub' },
+    { id: 'runway', name: 'Runway Hub', color: '#F5C518', c2: '#C99F0A', app: 'Runway', role: 'AI video.', where: 'Desktop › Runway Hub' },
+    { id: 'gemini', name: 'Gemini Hub', color: '#4D7CFF', c2: '#3459D9', app: 'Gemini', role: 'Research.', where: 'Desktop › Gemini Hub' }
   ];
   function member(id) { return MEMBERS.find(function (m) { return m.id === id; }) || MEMBERS[0]; }
-  function renderMembers() {
-    var box = $('members'); box.innerHTML = '';
-    MEMBERS.forEach(function (m) {
-      var open = jobs.filter(function (j) { return j.owner === m.id && j.status !== 'done'; }).length;
-      var d = document.createElement('div'); d.className = 'member';
-      d.innerHTML = robotSVG(m.color, m.c2);
-      if (GP_CHAT.has(m.id)) { GP_CHAT.hint(d, m.id, m.name); d.addEventListener('click', function () { GP_CHAT.open(m.id); }); }
-      var t = document.createElement('div');
-      var b = document.createElement('b'); b.textContent = m.name; b.style.color = m.color;
-      var r = document.createElement('div'); r.className = 'role'; r.textContent = m.role;
-      var w = document.createElement('div'); w.className = 'where'; w.textContent = m.where;
-      var o = document.createElement('div'); o.className = 'open'; o.textContent = open ? open + ' open job' + (open > 1 ? 's' : '') : 'No open jobs';
-      t.appendChild(b); t.appendChild(r); t.appendChild(w); t.appendChild(o); d.appendChild(t); box.appendChild(d);
-    });
-    var sel = $('jobOwner'), cur = sel.value || 'bolt'; sel.innerHTML = '';
-    MEMBERS.forEach(function (m) { var op = document.createElement('option'); op.value = m.id; op.textContent = 'Give to ' + m.name; sel.appendChild(op); });
-    sel.value = cur;
-  }
-  function handoffText(j) {
-    var m = member(j.owner);
-    return [
-      'Hello ' + m.name + '. You are part of the Gold Petal Atelier AI Club House team. Codex (the club leader) is passing you this job from the owner.',
-      '',
-      'JOB: ' + j.title,
-      j.details ? 'DETAILS: ' + j.details : '',
-      '',
-      business.trim() ? 'ABOUT THE BUSINESS:\n' + business.trim().slice(0, 2500) : '',
-      '',
-      'Please do the job and reply with the finished work only, ready to use. Do not ask for passwords, payment details or logins.'
-    ].filter(function (x, i, a) { return !(x === '' && a[i - 1] === ''); }).join('\n').trim();
-  }
-  function copyText(text, note) {
-    function done() { note.textContent = 'Copied. Now paste it into ' + member(note.dataset.owner).app + '.'; note.hidden = false; }
-    function fallback() {
-      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
-      document.body.appendChild(ta); ta.select();
-      var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
-      document.body.removeChild(ta);
-      if (ok) done(); else { note.textContent = 'Couldn\'t copy automatically. Select the text in the box and copy it.'; note.hidden = false; }
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
-  }
+  function renderMembers() { /* Club team UI removed */ }
+  function renderJobs() { /* Job board UI removed */ }
   function addJob(title, details, owner, status) {
     title = String(title || '').trim().slice(0, 160);
     if (!title) throw new Error('Job title is empty');
     owner = MEMBERS.some(function (m) { return m.id === owner; }) ? owner : 'bolt';
     var j = { id: uid(), title: title, details: String(details || '').trim().slice(0, 1500), owner: owner, status: status === 'doing' || status === 'done' ? status : 'todo', result: '', ts: Date.now() };
     jobs.push(j); if (jobs.length > 80) jobs = jobs.slice(-80);
-    save(); renderJobs(); renderMembers();
+    save();
     log('New job for ' + member(owner).name);
     return { id: j.id, title: j.title, owner: j.owner, status: j.status };
   }
@@ -1470,61 +1374,10 @@ window.GP_CHAT = (function () {
     if (patch.status && ['todo', 'doing', 'done'].indexOf(patch.status) >= 0) j.status = patch.status;
     if (typeof patch.result === 'string') j.result = patch.result.slice(0, 6000);
     if (patch.owner && MEMBERS.some(function (m) { return m.id === patch.owner; })) j.owner = patch.owner;
-    save(); renderJobs(); renderMembers();
+    save();
     return { id: j.id, status: j.status, owner: j.owner };
   }
-  function removeJob(id) { jobs = jobs.filter(function (o) { return o.id !== id; }); save(); renderJobs(); renderMembers(); }
-  function btn(label, cls, fn) { var b = document.createElement('button'); b.type = 'button'; b.textContent = label; if (cls) b.className = cls; b.addEventListener('click', fn); return b; }
-  function renderJobs() {
-    ['todo', 'doing', 'done'].forEach(function (lane) {
-      var ul = $('lane-' + lane); ul.innerHTML = '';
-      var list = jobs.filter(function (j) { return j.status === lane; });
-      $('cnt-' + lane).textContent = list.length;
-      list.forEach(function (j) {
-        var m = member(j.owner);
-        var li = document.createElement('li'); li.className = 'job'; li.style.setProperty('--who', m.color);
-        var who = document.createElement('span'); who.className = 'who'; who.textContent = m.name;
-        var t = document.createElement('span'); t.className = 't'; t.textContent = j.title;
-        li.appendChild(who); li.appendChild(t);
-        if (j.details) { var d = document.createElement('span'); d.className = 'd'; d.textContent = j.details; li.appendChild(d); }
-        if (j.result) { var r = document.createElement('div'); r.className = 'res'; r.textContent = j.result; li.appendChild(r); }
-        var acts = document.createElement('div'); acts.className = 'acts';
-        var note = document.createElement('span'); note.className = 'copied'; note.hidden = true; note.dataset.owner = j.owner;
-        if (j.status !== 'done') {
-          if (j.owner === 'bolt') {
-            acts.appendChild(btn('Codex, do it', 'go', function () {
-              updateJob(j.id, { status: 'doing' });
-              send('Please do job ' + j.id + ' from the job board now: "' + j.title + '"' + (j.details ? ' (' + j.details + ')' : '') + '. When finished, save your work as the job result with update_job and mark it done.');
-            }));
-          } else {
-            acts.appendChild(btn('Copy instruction', 'go', function () { copyText(handoffText(j), note); if (j.status === 'todo') updateJob(j.id, { status: 'doing' }); }));
-            acts.appendChild(btn('Paste their answer', '', function () {
-              if (li.querySelector('textarea')) return;
-              var ta = document.createElement('textarea'); ta.placeholder = 'Paste ' + m.name + '\'s answer here'; ta.setAttribute('aria-label', 'Paste ' + m.name + '\'s answer');
-              var sv = btn('Save answer & mark done', 'go', function () { if (!ta.value.trim()) return; updateJob(j.id, { result: ta.value.trim(), status: 'done' }); log(m.name + ' finished a job'); });
-              li.insertBefore(ta, acts); li.insertBefore(sv, acts); ta.focus();
-            }));
-          }
-          if (j.status === 'todo') acts.appendChild(btn('Start', '', function () { updateJob(j.id, { status: 'doing' }); }));
-          acts.appendChild(btn('Mark done', '', function () { updateJob(j.id, { status: 'done' }); }));
-        } else {
-          acts.appendChild(btn('Reopen', '', function () { updateJob(j.id, { status: 'todo' }); }));
-          if (j.result) acts.appendChild(btn('Copy result', '', function () { copyText(j.result, note); }));
-        }
-        acts.appendChild(btn('Remove', '', function () { removeJob(j.id); }));
-        li.appendChild(acts); li.appendChild(note);
-        ul.appendChild(li);
-      });
-    });
-    $('jobCount').textContent = jobs.length + (jobs.length === 1 ? ' job' : ' jobs');
-    $('jobsEmpty').hidden = jobs.length > 0;
-  }
-  $('addJob').addEventListener('submit', function (e) {
-    e.preventDefault(); var v = $('jobTitle').value; if (!v.trim()) return;
-    addJob(v, '', $('jobOwner').value); $('jobTitle').value = '';
-  });
-  $('planBtn').addEventListener('click', function () { send($('planBtn').dataset.p); });
-
+  function removeJob(id) { jobs = jobs.filter(function (o) { return o.id !== id; }); save(); }
 
   // ================= Cooling loop =================
   var coolT = 24, coolSvg = $('coolSvg'), coolBucket = -1;
@@ -1818,7 +1671,7 @@ window.GP_CHAT = (function () {
     ['amra', 'Check the discount sale wording is fair and legal', 'Flag any claim that needs changing before it goes public.'],
     ['ralph', 'Back up this week\'s price cards to the SSD', 'Copy and check the Mini Program Kit folder; nothing deleted.']
   ];
-  var HELP = 'I\'m running on my offline backup brain, so I work with simple commands. Try:\n- "walk east 4 steps", "go to the top right corner", "wave", "jump", "spin", "patrol", "dance"\n- "add tasks: call the supplier, send the Q4 report"\n- "done 2" or "remove task 3", "plan my day"\n- "remember my best seller is red roses", "forget red roses", "what do you know about me?"\n- "draft an email to my team saying the meeting moves to 10am"\n- "plan the week" to share jobs out to the club team\n- "where is Miranda?" to spotlight anyone, "Miranda summary" to read her Data Building room\nNo API keys, no internet: everything stays in this browser.';
+  var HELP = 'I\'m running on my offline backup brain, so I work with simple commands. Try:\n- "walk east 4 steps", "go to the top right corner", "wave", "jump", "spin", "patrol", "dance"\n- "add tasks: call the supplier, send the Q4 report"\n- "done 2" or "remove task 3", "plan my day"\n- "remember my best seller is red roses", "forget red roses", "what do you know about me?"\n- "draft an email to my team saying the meeting moves to 10am"\n- "where is Miranda?" to spotlight anyone, "Miranda summary" to read her Data Building room\nNo API keys, no internet: everything stays in this browser.';
 
   // ---- Codex online brain: the Mac app passes the message to the signed-in Grok/ChatGPT tab and returns the reply ----
   function bridge() { return window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.gpBolt; }
