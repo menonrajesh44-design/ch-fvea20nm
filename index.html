@@ -259,7 +259,7 @@ function net(){document.body.classList.toggle('offline',!navigator.onLine);const
 addEventListener('online',net);addEventListener('offline',net);net();
 function unstick(){ if(window.CHChat) try{CHChat.close();}catch(e){} document.documentElement.classList.remove('gc-lock'); document.querySelectorAll('.gc-back:not(.on)').forEach(b=>b.hidden=true); }
 addEventListener('pageshow',e=>{ if(e.persisted) unstick(); });
-if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=11',{updateViaCache:'none'}).catch(()=>{}));}
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v=12',{updateViaCache:'none'}).catch(()=>{}));}
 </script>
 </body>
 </html>
