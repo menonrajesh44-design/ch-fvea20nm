@@ -14,7 +14,7 @@
   const CFG = 'ch.dubai.chatcfg.';
   const SNAP_KEY = 'ch.dubai.chatbackup.before-restore';
   const BOT_IDS = ['ralph', 'alexa', 'miranda', 'priya', 'millie', 'orange', 'amra', 'metaads', 'orchidwest', 'mellow'];
-  const RETIRED_IDS = ['jack'];   // 9 Oct 2026: Jack fired (Raj). Off quick chat; old backups that hold his chat still validate, his part is ignored. Nothing is deleted.
+  const RETIRED_IDS = [];   // 22 Oct 2026: Jail emptied — Jack released (Raj). Quick chat open again; old backups still validate.
   const KEEP_PER_BOT = 200;   // messages kept on the phone per bot
   const SEND_TURNS = 12;      // messages sent to the relay (it trims to 12 too)
   const MAX_INPUT = 2000;
